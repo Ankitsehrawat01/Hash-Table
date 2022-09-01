@@ -40,6 +40,25 @@ namespace HashTableProblem
             KeyValue<K, V> item = new KeyValue<K, V>() { Key = key, Value = value };
             linkedlist.AddLast(item);
         }
+        public void Remove(K key)
+        {
+            int position = GetArrayPosition(key);
+            LinkedList<KeyValue<K, V>> linkedlist = GetLinkedList(position);
+            bool itemFound = false;
+            KeyValue<K, V> foundItem = default(KeyValue<K, V>);
+            foreach (KeyValue<K, V> item in linkedlist)
+            {
+                if (item.Key.Equals(key))
+                {
+                    itemFound = true;
+                    foundItem = item;
+                }
+            }
+            if (itemFound)
+            {
+                linkedlist.Remove(foundItem);
+            }
+        }
         protected LinkedList<KeyValue<K,V>> GetLinkedList(int position)
         {
             LinkedList<KeyValue<K, V>> linkedlist = items[position];
